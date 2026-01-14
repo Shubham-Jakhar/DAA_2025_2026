@@ -1,12 +1,11 @@
 #include<iostream>
-using namespace std;
 #include <bits/stdc++.h>
+#include <chrono>
+using namespace std::chrono;
 using namespace std;
 
 int cnt = 0;
-int dep =0;
 void complexRec(int n) {
-
 
    if (n <= 2) {
        return;
@@ -37,19 +36,21 @@ void complexRec(int n) {
    } else {
        reverse(small.begin(), small.end());
    }
-   cnt++;
-
-
    complexRec(n / 2);
    complexRec(n / 2);
    complexRec(n / 2);
-   dep++;
 
 }
 
 int main(){
-    complexRec(16);
-    cout<<cnt<<endl;
-    cout<<dep;
+    int n;
+    cin>>n;
+    auto start = high_resolution_clock::now();
+    complexRec(n);
+    auto end = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(end - start);
+    cout << "No. of operations: "<<cnt<<endl;
+    cout << "Depth: "<<floor(log2(n))<<endl;
+    cout << "Execution time: "<<duration.count();
     return 0;
 }    
